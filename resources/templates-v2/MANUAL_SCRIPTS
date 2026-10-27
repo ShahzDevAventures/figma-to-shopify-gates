@@ -1,0 +1,11 @@
+# Scripts that no gate invokes ON PURPOSE, with the reason.
+# Installed to .claude/scripts/MANUAL_SCRIPTS by bootstrap.
+#
+# Preflight warns about any f2s_* script that no gate, command or agent runs, because on a
+# prior build the deviation harvester was invoked by nothing while the deviations it would have
+# surfaced shipped to production. A script no door runs is documentation.
+#
+# This file is the allowlist for the legitimate exceptions. Adding a line here is a claim that the
+# script is invoked by something outside the gate graph — say what, so the next person can check.
+
+f2s_precommit.sh   — invoked by git as the pre-commit/commit-msg hook via core.hooksPath, not by another script

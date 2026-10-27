@@ -1,0 +1,5 @@
+{% comment %} FIXTURE snippet: assign first, then pass — no filter inside render args {% endcomment %}
+{% liquid
+  assign size = size | default: 16
+%}
+<svg width="{{ size }}" height="{{ size }}" fill="{{ color }}" aria-hidden="true"><use href="#icon-{{ name }}"></use></svg>

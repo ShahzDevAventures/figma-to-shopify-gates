@@ -1,0 +1,12 @@
+<div class="hero">
+  <h1>Hardcoded Big Title Here</h1>
+  {% for block in section.blocks %}<div>{{ block.settings.caption }}</div>{% endfor %}
+</div>
+{% schema %}
+{
+  "name": "f2s broken",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title" },
+  ],
+}
+{% endschema %}

@@ -1,0 +1,10 @@
+{% comment %} FIXTURE: schema JSON that does not parse at all (unquoted key + missing value) — U-f {% endcomment %}
+<div class="f2s-bad-json"></div>
+{% schema %}
+{
+  "name": "Bad JSON",
+  settings: [
+    { "type": "text", "id": "title", "label": }
+  ]
+}
+{% endschema %}

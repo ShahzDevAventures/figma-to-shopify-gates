@@ -1,0 +1,33 @@
+{% comment %}
+  f2s_home_hero.liquid
+  Purpose: Homepage hero — title, accent, CTA over media.
+  Spec:    .claude/knowledge/extraction/figma/TEST__1-1/spec.json
+  Data:    section settings only (global copy)
+  Renders: none
+  Settings: title, accent, cta_label, cta_url
+  Owner:   fixture / test    Updated: 2026-07-03
+{% endcomment %}
+<div class="f2s-hero">
+  <h1>{{ section.settings.title }}</h1>
+  <p>{{ section.settings.accent }}</p>
+  <a href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>
+  {% for block in section.blocks %}
+    <div {{ block.shopify_attributes }}>{{ block.settings.caption }}</div>
+  {% endfor %}
+</div>
+{% schema %}
+{
+  "name": "Hero banner",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Setting the bar" },
+    { "type": "text", "id": "accent", "label": "Accent", "default": "since 1991" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Shop now" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" }
+  ],
+  "blocks": [
+    { "type": "caption", "name": "Caption",
+      "settings": [ { "type": "text", "id": "caption", "label": "Caption", "default": "Trusted gear" } ] }
+  ],
+  "presets": [ { "name": "Hero banner" } ]
+}
+{% endschema %}

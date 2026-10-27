@@ -1,0 +1,18 @@
+{
+  "_comment": "Role->model routing (v2 item 17). Judgment stays strong; mechanics are swappable. Builder MUST differ from verifier. Change models here only — agents read this, prompts never hardcode models.",
+  "orchestrator":        { "model": "opus",   "effort": "high" },
+  "figma_theme_audit":   { "model": "opus",   "effort": "high" },
+  "researcher":          { "model": "opus",   "effort": "high",  "escalate_layered": "xhigh" },
+  "harness_builder":     { "model": "sonnet", "effort": "medium" },
+  "builder":             { "model": "sonnet", "effort": "medium-high",
+                           "_audition_candidates": ["composer-2.5-standard (in Cursor)", "glm-5.2 (via ollama launch claude --model glm-5.2:cloud)"],
+                           "_promotion_rule": "wins cost-per-accepted-section in the controlled rerun; see telemetry.csv" },
+  "verifier":            { "model": "opus",   "effort": "high", "must_differ_from": "builder",
+                           "page_integration_effort": "xhigh" },
+  "fixer":               { "model": "sonnet", "effort": "medium", "_swappable": true },
+  "docs_handoff":        { "model": "sonnet", "effort": "low-medium" },
+  "triage":              { "_comment": "item 16: simple sections use the lite loop", 
+                           "simple":   { "research": "sonnet/medium", "verify": "deterministic-gates-only (measure + pixel-diff); any failure auto-promotes to standard" },
+                           "standard": { "research": "opus/high", "verify": "full independent parity subagent" },
+                           "complex":  { "research": "opus/xhigh", "verify": "full + second verifier on 2nd failure" } }
+}

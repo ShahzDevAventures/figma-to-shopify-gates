@@ -1,0 +1,157 @@
+{
+ "$comment": "Per-section spec.json \u2014 the distilled, checkable must_haves for one Figma section node. Produced during Research (verbatim from get_design_context, NEVER rounded). Single source of truth for plan, build, and goal-backward verify. Lives at extraction/figma/sections/<key>/spec.json. See SKILL.md 'Per-Section Build & Verify Loop' and VERIFY_HARNESS.md.",
+ "node": {
+  "fileKey": "AbCdEf",
+  "nodeId": "30233:329",
+  "label": "Homepage Benefits",
+  "version": "<figma lastModified or version hash>"
+ },
+ "section": {
+  "liquid": "f2s_benefits",
+  "band": "#b22b27"
+ },
+ "reference": {
+  "desktop": "screenshots/AbCdEf__30233-329@1440.png",
+  "mobile": "screenshots/AbCdEf__30233-329@375.png"
+ },
+ "assets": [
+  "assets/ben_clean.png",
+  "assets/ben_center.png"
+ ],
+ "$comment_spacing": "Exact px from get_design_context. Build matches these; map to a token only if the token equals the value, else add a token or use the literal. Never snap to nearest.",
+ "spacing": {
+  "section": {
+   "padding-block": 120,
+   "padding-inline": 80
+  },
+  "gutter-right": null,
+  "grid": {
+   "template": "repeat(3, 1fr)",
+   "column-gap": 16,
+   "row-gap": 80
+  },
+  "card": {
+   "padding": 28,
+   "gap": 20
+  }
+ },
+ "type": {
+  "title": {
+   "size": 56,
+   "line-height": 0.92,
+   "letter-spacing": 0,
+   "weight": 800,
+   "transform": "uppercase",
+   "color": "inverse"
+  },
+  "cardTitle": {
+   "size": 36,
+   "line-height": 1.0,
+   "weight": 800,
+   "transform": "uppercase",
+   "color": "inverse"
+  },
+  "eyebrow": {
+   "size": 12,
+   "letter-spacing": 3,
+   "weight": 800,
+   "color": "accent-red"
+  },
+  "body": {
+   "size": 16,
+   "line-height": 1.25,
+   "weight": 400,
+   "color": "inverse"
+  }
+ },
+ "structure": "Split header + quadrant: 4 corner cards around a centered product image. NOTE: middle-top card is opacity-0 (a spacer reserving the center column).",
+ "radius": {
+  "card-media": 24
+ },
+ "gotchas": [
+  "Band override flips eyebrow/title/text to inverse \u2014 re-assert the intended color in THIS band.",
+  "Center column is reserved by an invisible (opacity-0) card in Figma."
+ ],
+ "$comment_breakpoints": "375 is its OWN spec, not desktop-reflowed. Capture mobile padding/stacking/type from the mobile Figma node.",
+ "breakpoints": {
+  "375": {
+   "spacing": {
+    "section": {
+     "padding-inline": 20
+    },
+    "grid": {
+     "template": "1fr"
+    }
+   },
+   "type": {
+    "title": {
+     "size": 36
+    }
+   }
+  }
+ },
+ "$comment_editability": "Every text/image below MUST map to a setting with the Figma value as default (Theme-Editor Wiring Audit).",
+ "editable": [
+  {
+   "node": "eyebrow text",
+   "setting": "section.settings.heading_eyebrow",
+   "default": "Why us"
+  },
+  {
+   "node": "title",
+   "setting": "section.settings.heading_title",
+   "default": "Better snacking starts with better standards."
+  },
+  {
+   "node": "benefit cards",
+   "setting": "blocks[].settings.{title,body,media}",
+   "repeatable": true
+  },
+  {
+   "node": "center image",
+   "setting": "section.settings.center_image"
+  }
+ ],
+ "$comment_checks": "Fed verbatim to window.F2S_SPEC.checks for f2s_measure.py. prop = CSS computed property OR derived metric (box.width|box.height|gap-to-right|lines).",
+ "checks": [
+  {
+   "id": "section-pb",
+   "selector": ".f2s-benefits",
+   "prop": "padding-top",
+   "expect": 120
+  },
+  {
+   "id": "grid-colgap",
+   "selector": ".f2s-benefits__grid",
+   "prop": "column-gap",
+   "expect": 16
+  },
+  {
+   "id": "grid-rowgap",
+   "selector": ".f2s-benefits__grid",
+   "prop": "row-gap",
+   "expect": 80
+  },
+  {
+   "id": "card-title",
+   "selector": ".f2s-benefits__title",
+   "prop": "font-size",
+   "expect": 36
+  },
+  {
+   "id": "card-radius",
+   "selector": ".f2s-benefits__media",
+   "prop": "border-top-left-radius",
+   "expect": 24
+  }
+ ],
+ "node_key": "<fileKey>__<nodeId-dashed>",
+ "breakpoints_designed": {
+  "desktop": "<actual designed width, e.g. 1440>",
+  "mobile": "<actual designed width, e.g. 430 \u2014 read from the frame, NEVER assumed 375>"
+ },
+ "annotations": [
+  "<EVERY designer note harvested from annotation frames / dev-mode notes near this node \u2014 anything not listed here does not exist downstream. Verifier checks each off.>"
+ ],
+ "must_haves": {}
+}

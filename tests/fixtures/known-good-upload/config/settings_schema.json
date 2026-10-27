@@ -1,0 +1,17 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "fixture",
+    "theme_version": "0.0.1",
+    "theme_author": "fixture",
+    "theme_documentation_url": "https://example.com",
+    "theme_support_url": "https://example.com"
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      { "type": "range", "id": "page_width", "label": "Page width", "min": 1000, "max": 1600, "step": 100, "default": 1200, "unit": "px" },
+      { "type": "url", "id": "promo_url", "label": "Promo link" }
+    ]
+  }
+]

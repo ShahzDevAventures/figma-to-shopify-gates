@@ -1,0 +1,47 @@
+{% comment %}
+  f2s_bad_upload.liquid — FIXTURE. Every Shopify admin upload rejection that theme-check
+  passed every gate on one rebuild (decision 0057). Must trip U-a U-b U-c U-d U-e U-g.
+{% endcomment %}
+{% liquid
+  assign tone = section.settings.tone
+  # a line comment inside a liquid block is fine
+  render 'f2s_icon', name: 'arrow', color: tone | default: '#000'
+%}
+<div class="f2s-bad-upload">
+  {% render 'f2s_icon', name: 'arrow', color: section.settings.tone | default: '#000' %}
+  {{ section.settings.rating_template | replace: '{{rating}}', product.metafields.reviews.rating }}
+</div>
+{% schema %}
+{
+  "name": "Bad upload",
+  "settings": [
+    { "type": "header", "content": "This header content string is far too long for the theme editor to accept" },
+    { "type": "range", "id": "columns_mobile", "label": "Columns on mobile", "min": 1, "max": 2, "step": 1, "default": 2 },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 1, "default": 85, "unit": "px" },
+    { "type": "range", "id": "gap", "label": "Gap", "min": 0, "max": 100, "default": 0, "unit": "px" },
+    { "type": "range", "id": "speed", "label": "Speed", "min": 0, "max": 100, "step": 10, "default": 25, "unit": "px/s" },
+    { "type": "url", "id": "link", "label": "Link", "default": "" },
+    { "type": "url", "id": "cta_url", "label": "Button link", "default": "#f2s-anchor" },
+    { "type": "url", "id": "locator_url", "label": "Store locator page", "default": "/pages/find-us" },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "legal-menu" },
+    { "type": "text", "id": "tone", "label": "" },
+    { "type": "text", "id": "title", "label": "This label is far too long for the Shopify theme editor to accept at upload time", "default": "x" },
+    { "type": "select", "id": "variant", "label": "Variant", "options": [
+      { "value": "a", "label": "Full-bleed photo with a wave edge, for the collection landing page" },
+      { "value": "b", "label": "Plain" }
+    ], "default": "a" }
+  ],
+  "blocks": [
+    { "type": "item", "name": "", "settings": [] },
+    { "type": "faq", "name": "Frequently asked question row", "settings": [
+      { "type": "range", "id": "pad", "label": "Pad", "min": 0, "max": 40, "step": 4, "default": 8 }
+    ] }
+  ],
+  "presets": [
+    { "name": "Bad upload", "settings": { "padding_top": 85, "speed": 25 },
+      "blocks": [ { "type": "faq", "settings": { "pad": 9 } } ] }
+  ]
+}
+{% endschema %}
+{% style %}
+  .f2s-bad-upload { color: red; }

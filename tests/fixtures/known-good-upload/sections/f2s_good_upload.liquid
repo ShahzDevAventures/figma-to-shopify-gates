@@ -1,0 +1,68 @@
+{% comment %}
+  f2s_good_upload.liquid — FIXTURE. Legal shapes the upload validator must NOT flag:
+  nested comments, a `{% schema %}` mentioned inside a comment, pipes inside string literals,
+  assign-then-render, liquid-block comment pairs, a 3-value range (columns_mobile 1-3 was
+  accepted), url default on a built-in route, `t:` translation keys, a {% doc %} example with a pipe,
+  presets on the step grid, a `}}` inside a statement tag's literal (safe — only output tags cut short).
+  {% comment %} nested {% endcomment %}
+  Example text: {% schema %} is not a real tag here.
+{% endcomment %}
+{%- doc -%}
+  @example
+  {% render 'f2s_icon', alt: product.title | escape %}
+{%- enddoc -%}
+{% liquid
+  assign tone = section.settings.tone | default: '#000'
+  assign rating_html = section.settings.rating_template | replace: '{{rating}}', '5'
+  # a line comment
+  comment
+    a liquid-block comment, properly closed
+  endcomment
+  render 'f2s_icon', name: 'arrow', color: tone
+%}
+<div class="f2s-good-upload" style="--pad: {{ section.settings.pad }}px">
+  {% render 'f2s_icon', name: 'arrow', color: tone, text: 'a | b' %}
+  {% render 'f2s_icon' with section.settings.tone as color %}
+  <a href="{{ section.settings.link }}">{{ section.settings.title }}</a>
+  {{ rating_html }} {{ 'general.unit_price' | t }} {{ "it's" | escape }}
+</div>
+{% style %}
+  .f2s-good-upload { padding: var(--pad); }
+{% endstyle %}
+{% javascript %}
+  document.addEventListener('shopify:section:load', function () {});
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Good upload",
+  "settings": [
+    { "type": "header", "content": "Layout" },
+    { "type": "header", "content": "t:sections.all.headings.this_translation_key_is_long_but_is_not_a_label_string" },
+    { "type": "range", "id": "pad", "label": "Padding", "min": 0, "max": 100, "step": 4, "default": 20, "unit": "px" },
+    { "type": "range", "id": "columns_mobile", "label": "Columns on mobile", "min": 1, "max": 3, "step": 1, "default": 2 },
+    { "type": "range", "id": "speed", "label": "Speed (px per second)", "min": 0, "max": 100, "step": 10, "default": 30, "unit": "px" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "url", "id": "link_default", "label": "Link with default", "default": "/collections/all" },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "text", "id": "tone", "label": "t:sections.good.settings.tone.label_which_is_also_a_long_translation_key", "default": "#000" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Good" },
+    { "type": "text", "id": "rating_template", "label": "Rating template", "default": "{{rating}} stars" },
+    { "type": "select", "id": "variant", "label": "Variant", "options": [
+      { "value": "a", "label": "Full-bleed photo, wave edge" },
+      { "value": "b", "label": "t:sections.good.settings.variant.options__2.label_long_key" }
+    ], "default": "a" }
+  ],
+  "blocks": [
+    { "type": "item", "name": "Item", "settings": [
+      { "type": "text", "id": "caption", "label": "Caption", "default": "x" },
+      { "type": "range", "id": "pad", "label": "Pad", "min": 0, "max": 40, "step": 4, "default": 8 }
+    ] },
+    { "type": "faq", "name": "t:sections.good.blocks.faq.name_long_translation_key" },
+    { "type": "@app" }
+  ],
+  "presets": [
+    { "name": "Good upload", "settings": { "pad": 24, "columns_mobile": 3 },
+      "blocks": [ { "type": "item", "settings": { "pad": 12 } } ] }
+  ]
+}
+{% endschema %}

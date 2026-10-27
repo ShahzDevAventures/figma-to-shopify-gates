@@ -1,0 +1,8 @@
+{% comment %}
+  FIXTURE: an unclosed comment block in a snippet — U-d. The next tag is not an endcomment.
+<span class="f2s-bad-comment">{{ text }}</span>
+{% liquid
+  comment
+    this liquid-block comment is never closed either
+  assign x = 1
+%}
