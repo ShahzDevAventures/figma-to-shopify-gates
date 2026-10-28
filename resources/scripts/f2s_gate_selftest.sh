@@ -51,7 +51,7 @@ else
   NONCHECKER_REDS=$(grep -c '^🔴' /tmp/cs_st_ch.log)
   CHECKER_REDS=$(grep -c '^🔴.*theme.check' /tmp/cs_st_ch.log || true)
   if [ "$NONCHECKER_REDS" -eq "${CHECKER_REDS:-0}" ]; then
-    echo "  ⚠️  codehealth known-good fails ONLY on missing theme checker — install 'theme-check' gem; treating as tolerated in selftest"
+    echo "  ⚠️  theme-check gem not installed, so the codehealth gate skipped its Liquid lint step (tolerated here; install theme-check for the full run)"
   else
     echo "  🔴 codehealth known-good fails on non-checker gates:"; grep '^🔴' /tmp/cs_st_ch.log | sed 's/^/       /'
     fails=$((fails+1))
